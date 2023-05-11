@@ -25,4 +25,22 @@ const breedFetcher = function(breedName) {
   });
 };
 
+//Allow the user to specify the breed name using command-line arguments.
+const breedName = process.argv[2];
 
+if (!breedName) {
+  console.log('Please provide a breed name as an argument.');
+  process.exit(1);
+}
+
+//Handle request errors and print the error details to the screen.
+breedFetcher(breedName)
+  .then(description => {
+    console.log('Description:', description);
+  })
+  .catch(error => {
+    console.log('Error:', error);
+  });
+
+
+module.exports = {breedFetcher};
